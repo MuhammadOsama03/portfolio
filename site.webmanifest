@@ -1,0 +1,9 @@
+{
+  "name": "Muhammad Osama Portfolio",
+  "short_name": "MO Portfolio",
+  "description": "Software development, AI/ML, IoT and data projects by Muhammad Osama.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b0d10",
+  "theme_color": "#0b0d10"
+}
