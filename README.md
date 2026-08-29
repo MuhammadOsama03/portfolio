@@ -8,8 +8,10 @@ My personal portfolio website for presenting my software development, AI/ML, IoT
 - Technical skills grouped by area
 - Selected project cards with direct repository links
 - Software, data, open-source QA and leadership experience
-- Mobile-friendly layout
-- Contact and GitHub navigation
+- GitHub and LinkedIn contact destinations
+- Mobile-friendly navigation with keyboard support
+- Active-section navigation feedback
+- Custom 404 page and web app metadata
 
 ## Featured work
 
@@ -26,6 +28,14 @@ A Python command-line AI agent that uses Gemini function calling with calculator
 
 HTML, CSS and JavaScript. The portfolio intentionally stays lightweight and does not require a frontend framework or build process.
 
+## Accessibility and QA
+
+The final pass includes visible keyboard focus, Escape-key menu handling, active navigation state, reduced-motion support, and mobile review guidance. See `ACCESSIBILITY.md` and `QA.md` for the review checklists.
+
+## Deployment
+
+The site is ready for static hosting. It can be published with GitHub Pages directly from the `main` branch or deployed to another static host without a build step. See `DEPLOYMENT.md` for the pre-deployment checklist.
+
 ## Status
 
-The core content is now in place. Final interaction polish, accessibility review and deployment preparation are still in progress.
+The three-day build is complete and ready for a final browser/device smoke test before public deployment.
