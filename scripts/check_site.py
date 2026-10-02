@@ -1,5 +1,6 @@
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -8,11 +9,14 @@ class AnchorParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.ids = set()
+        self.duplicate_ids = set()
         self.links = []
 
     def handle_starttag(self, tag, attrs):
         values = dict(attrs)
         if "id" in values:
+            if values["id"] in self.ids:
+                self.duplicate_ids.add(values["id"])
             self.ids.add(values["id"])
         if tag == "a" and values.get("href"):
             self.links.append(values["href"])
@@ -29,6 +33,15 @@ def main() -> None:
     broken = sorted({href for href in parser.links if href.startswith("#") and href[1:] not in parser.ids})
     if broken:
         raise SystemExit(f"Broken internal anchors: {', '.join(broken)}")
+    if parser.duplicate_ids:
+        raise SystemExit(f"Duplicate element IDs: {', '.join(sorted(parser.duplicate_ids))}")
+
+    unsafe = sorted({
+        href for href in parser.links
+        if urlparse(href).scheme.lower() not in {"", "http", "https", "mailto"}
+    })
+    if unsafe:
+        raise SystemExit(f"Unsafe link schemes: {', '.join(unsafe)}")
 
     manifest = (ROOT / "site.webmanifest").read_text(encoding="utf-8").strip()
     if not manifest:
